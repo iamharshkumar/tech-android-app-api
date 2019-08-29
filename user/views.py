@@ -46,6 +46,6 @@ class UserCreate(APIView):
                 token = Token.objects.create(user=user)
                 json = serializer.data
                 json['token'] = token.key
-                return Response(serializer.data, status=HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+                return Response({'token': token.key}, status=HTTP_201_CREATED)
+        return Response({'error': 'Account create unsuccessfull!'}, status=HTTP_400_BAD_REQUEST)
 
